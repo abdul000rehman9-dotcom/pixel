@@ -71,7 +71,7 @@ export default function BenefitsBento() {
                 <div className="w-full flex justify-center items-center overflow-hidden h-0 opacity-0 group-hover:h-28 group-hover:opacity-100 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]">
                   <div className="w-20 h-20 rounded-full overflow-hidden border border-black/5 relative">
                     <Image
-                      src="/images/img_13.webp"
+                      src="/images/idotive-home-one-multi-1.webp"
                       alt="Multi-industry"
                       fill
                       sizes="80px"

@@ -10,6 +10,7 @@ interface HeaderProps {
   activePage: PageType;
   setActivePage: (page: PageType) => void;
   onContactClick: () => void;
+  transparent?: boolean;
 }
 
 interface MenuItem {
@@ -20,7 +21,7 @@ interface MenuItem {
   columns?: { name: string; page: PageType }[][];
 }
 
-export default function Header ({ activePage, setActivePage, onContactClick }: HeaderProps) {
+export default function Header ({ activePage, setActivePage, onContactClick, transparent = false }: HeaderProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [activeSubMenu, setActiveSubMenu] = useState<string | null>(null);
 
@@ -55,10 +56,8 @@ export default function Header ({ activePage, setActivePage, onContactClick }: H
         ],
         [
           { name: 'Pricing', page: 'pricing' },
-          { name: 'License', page: 'style-guide' },
+          { name: 'License', page: 'license' },
           { name: 'Style guide', page: 'style-guide' },
-          { name: 'Changelog', page: 'home' },
-          { name: '404', page: 'home' },
         ],
       ],
     },
@@ -102,7 +101,7 @@ export default function Header ({ activePage, setActivePage, onContactClick }: H
   ];
 
   return (
-    <header className="relative z-50 w-full border-b border-black/10 bg-[#f9f8f4] px-6 py-4 md:px-16 md:py-5">
+    <header className={`relative z-50 w-full ${transparent ? 'bg-transparent border-transparent' : 'border-b border-black/10 bg-[#f9f8f4]'} px-6 py-4 md:px-16 md:py-5`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         {/* Logo */}
         <button
@@ -146,17 +145,20 @@ export default function Header ({ activePage, setActivePage, onContactClick }: H
               onContactClick();
               setIsOpen(false);
             }}
-            className="group relative inline-flex h-[38px] items-center justify-center overflow-hidden rounded-none bg-black px-5 text-[10px] md:text-[11px] font-bold uppercase tracking-wider text-white transition-colors duration-300 cursor-pointer"
+            className="group relative inline-flex h-[38px] items-center justify-center overflow-hidden rounded-none bg-black px-5 text-[10px] md:text-[11px] font-bold uppercase tracking-wider text-white transition-all duration-500 cursor-pointer"
           >
-            {/* Orange Hover Effect */}
-            <span className="absolute inset-0 h-full w-full translate-y-full bg-[#f26b2c] transition-transform duration-300 ease-out group-hover:translate-y-0" />
+            {/* Dual sliding background (orange left, white right) */}
+            <div className="absolute inset-0 w-full h-full flex translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0">
+              <div className="w-1/2 h-full bg-[#f26b2c]" />
+              <div className="w-1/2 h-full bg-white" />
+            </div>
 
             {/* Text Sliding Wrapper */}
             <span className="relative z-10 block h-4 overflow-hidden">
-              <span className="block transform transition-transform duration-300 ease-out group-hover:-translate-y-full">
+              <span className="block transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full text-white">
                 Let's Collaborate
               </span>
-              <span className="absolute left-0 top-0 block translate-y-full transform transition-transform duration-300 ease-out group-hover:translate-y-0">
+              <span className="absolute left-0 top-0 block translate-y-full transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 text-black font-black">
                 Let's Collaborate
               </span>
             </span>

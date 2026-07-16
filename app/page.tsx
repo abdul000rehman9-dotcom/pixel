@@ -11,42 +11,52 @@ import { DarkSection } from "@/components/DarkSection";
 import Process from "@/components/Process";
 import Testimonials from "@/components/Testimonials";
 import Footer from "@/components/Footer";
+import AboutPage from "@/components/AboutPage";
 
 export default function Home() {
   const [activePage, setActivePage] = useState<string>("home");
 
   const onContactClick = () => {
-    // simple handler; adjust as needed
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
-type PageType = string;
-interface FooterProps {
-  setActivePage: (page: PageType) => void;
-}
   return (
     <>
       <Header
         activePage={activePage}
-        setActivePage={setActivePage}
+        setActivePage={(page) => {
+          if (page === "home") {
+            setActivePage("home");
+          } else {
+            window.location.href = `/${page}`;
+          }
+        }}
         onContactClick={onContactClick}
       />
       <main className="overflow-hidden">
-        <Hero />
-        <About />
-        <FeaturedWork />
-        <Services />
-        <Projects />
-        <main className="bg-black min-h-screen">
-         <Stats />
-          <div className="h-[40vh] flex items-center justify-center bg-black"></div>
-          <DarkSection />
-          {/* <div className="h-[100vh] bg-black" /> */}
-        </main>
-        <Process />
-        <Testimonials />
-   
+        {activePage === "home" ? (
+          <>
+            <Hero />
+            <About />
+            <FeaturedWork />
+            <Services />
+            <Projects />
+            <main className="bg-black min-h-screen">
+              <Stats />
+              <div className="h-[40vh] flex items-center justify-center bg-black"></div>
+              <DarkSection />
+            </main>
+            <Process />
+            <Testimonials />
+          </>
+        ) : activePage === "about" ? (
+          <AboutPage />
+        ) : (
+          <div className="min-h-[60vh] flex flex-col items-center justify-center py-20 bg-[#f4f1ea]">
+            <h2 className="text-2xl font-bold uppercase tracking-widest text-[#f26b2c] mb-4">Page Coming Soon</h2>
+            <p className="text-sm text-neutral-500 font-medium">This page is currently being designed and developed.</p>
+          </div>
+        )}
       </main>
       <Footer />
     </>

@@ -1,0 +1,6 @@
+{
+  "name": "Premium Creative Agency",
+  "description": "A high-end creative agency portfolio with interactive GSAP, Lenis smooth scrolling, Swiper slideshows, and Framer Motion animations.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -5,7 +5,7 @@ import { gsap } from "gsap";
 import Image from "next/image";
 
 
-import rotateIcon from "@/public/icons/idotive-icon.svg";
+import rotateIcon from "@/public/icons/idotive-icon-8.svg";
 
 interface CardItem {
   id: number;

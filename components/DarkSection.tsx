@@ -19,16 +19,16 @@ type CardData = {
 const CARDS: CardData[] = [
   {
     image: "/images/DarkSection1.webp", 
-    title: "Strategic creativity",
-    description: "We turn creative ideas into strategic outcomes combining insight, innovation, and design.",
+    title: "Multi-industry focus",
+    description: "We design brands for all industries. Our creative scope ranges from fashion to high tech and beyond.",
   },
   {
     image: "/images/DarkSection2.webp", 
-    title: "Collaborative partnership",
-    description: "We partner with you every step, combining your vision with our creative expertise.",
+    title: "Tailored creative execution",
+    description: "We merge insight and imagination to craft bespoke physical and digital assets.",
   },
   {
-    image: "/images/DarkSection3.webp", 
+    image: "/images/Darksection3.webp", 
     title: "Results-driven design",
     description: "We create performance-driven designs. Every pixel is shaped to deliver measurable outcomes.",
   },

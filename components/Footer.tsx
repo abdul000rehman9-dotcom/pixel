@@ -54,10 +54,9 @@ export default function Footer() {
     {
       title: 'Utility',
       links: [
-        { label: 'License', page: 'style-guide' as PageType },
-        { label: 'Style guide', page: 'style-guide' as PageType },
-        { label: 'Changelog', page: 'style-guide' as PageType },
-        { label: '404', page: '404' as PageType }
+        { label: 'Pricing', page: 'pricing' as PageType },
+        { label: 'License', page: 'license' as PageType },
+        { label: 'Style guide', page: 'style-guide' as PageType }
       ]
     }
   ];
