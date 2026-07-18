@@ -9,8 +9,7 @@ export default function StyleGuideRoutePage() {
   const [activePage, setActivePage] = useState<string>("style-guide");
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   return (

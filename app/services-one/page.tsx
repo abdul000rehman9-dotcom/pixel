@@ -106,8 +106,7 @@ export default function ServicesOnePage() {
   };
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   // GSAP Intersection Observer setup for "Our Services" Headline character split animation

@@ -112,10 +112,10 @@ export default function About() {
       id="about"
       className="relative overflow-hidden bg-[#faf8f3] px-6 pt-20 pb-16 sm:px-12 lg:px-20 lg:pt-28 lg:pb-24 z-10"
     >
-      {/* 3D Rotating Right Side Graphic */}
+      {/* 3D Rotating Right Side Graphic - Hidden on Mobile to prevent overlap */}
       <motion.div
         style={{ rotate: rotateValue }}
-        className="absolute right-[-4%] top-[4%] z-0 pointer-events-none w-[240px] h-[240px] sm:w-[350px] sm:h-[350px] lg:w-[480px] lg:h-[480px] xl:w-[550px] xl:h-[550px]"
+        className="hidden lg:block absolute right-[-4%] top-[4%] z-0 pointer-events-none lg:w-[480px] lg:h-[480px] xl:w-[550px] xl:h-[550px]"
       >
         <Image
           src="/icons/idotive-icon-8.png"
@@ -127,6 +127,23 @@ export default function About() {
       </motion.div>
 
       <div className="relative z-10 mx-auto max-w-[1550px]">
+        {/* Mobile/Tablet Rotating Star Graphic - positioned above the heading as a separate block-level element */}
+        <div className="block lg:hidden mb-6 text-left">
+          <motion.div
+            style={{ rotate: rotateValue }}
+            className="w-[60px] h-[60px] sm:w-[80px] sm:h-[80px] relative pointer-events-none"
+          >
+            <Image
+              src="/icons/idotive-icon-8.png"
+              alt="Rotating Star Graphic"
+              fill
+              className="object-contain"
+              priority
+              unoptimized
+            />
+          </motion.div>
+        </div>
+
         <div className="mb-6 text-xs font-bold uppercase tracking-[0.25em] text-neutral-400">
           About Us
         </div>
@@ -163,6 +180,8 @@ export default function About() {
                     width={56}
                     height={56}
                     className="h-full w-full object-cover"
+                    unoptimized
+                    referrerPolicy="no-referrer"
                   />
                 </div>
               ))}
@@ -230,7 +249,7 @@ export default function About() {
 
           {/* 3D Viewport wrapper */}
           <div 
-            className="flex items-center justify-start lg:justify-end w-full lg:w-auto min-w-[380px] h-36 relative overflow-visible px-4"
+            className="flex items-center justify-start lg:justify-end w-full lg:w-auto min-w-0 sm:min-w-[380px] h-36 relative overflow-visible px-4"
             style={{ perspective: "1400px", transformStyle: "preserve-3d" }}
           >
             <div className="absolute bottom-0 right-4 flex items-end justify-center h-32 overflow-visible" style={{ transformStyle: "preserve-3d" }}>

@@ -305,8 +305,7 @@ export default function ServicesThreePage() {
   const [currentTestimonial, setCurrentTestimonial] = useState<number>(0);
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   const nextTestimonial = () => {

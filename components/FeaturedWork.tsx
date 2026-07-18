@@ -3,13 +3,7 @@
 import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import Image from "next/image";
-import Link from "next/link";
-
-import workOrange from "@/public/images/idotive-home-one-multi-1.webp";
-import workCubes from "@/public/images/idotive-portfolio-image-one-p-1080.webp";
-import cardCampaign from "@/public/images/img.2.webp";
-import cardUiux from "@/public/images/(1)_poster.0000000.jpg";
-import wideProject from "@/public/images/idotive-portfolio-image-one-p-1080.webp"; 
+import Link from "next/link"; 
 
 export default function FeaturedWork() {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -126,14 +120,14 @@ export default function FeaturedWork() {
           {/* ROW 1 */}
           <div className="grid gap-8 md:grid-cols-[1.4fr_1fr]">
             <WorkCard
-              img={workOrange}
+              img="/images/portoflio20one-p-1080.webp"
               tag="Experiential design"
               tags={["Brand guidelines", "Editorial design"]}
               marqueeLabel="Experiential design"
               big
             />
             <WorkCard
-              img={workCubes}
+              img="/images/img_11.webp"
               tag="Visionary designs"
               tags={["Corporate identity", "Campaign print"]}
               marqueeLabel="Visionary designs"
@@ -142,12 +136,12 @@ export default function FeaturedWork() {
 
           {/* ROW 2 */}
           <div className="w-full flex justify-center">
-            <div className="w-full max-w-[75%]">
+            <div className="w-full md:max-w-[75%]">
               <WorkCard
-                img={wideProject}
-                tag="Visionary designs"
+                img="/images/img_12.webp"
+                tag="Strategic Brand Systems"
                 tags={["Logo System", "Marketing Collateral"]}
-                marqueeLabel="Visionary designs"
+                marqueeLabel="Strategic Brands"
                 big
               />
             </div>
@@ -156,16 +150,16 @@ export default function FeaturedWork() {
           {/* ROW 3 */}
           <div className="grid gap-8 md:grid-cols-[1fr_1.4fr]">
             <WorkCard
-              img={cardCampaign}
+              img="/images/idotive-portfolio-image-five-p-1080.webp"
               tag="Advertising with edge"
               tags={["Corporate identity", "Campaign print"]}
               marqueeLabel="Advertising campaigns"
             />
             <WorkCard
-              img={cardUiux}
-              tag="Advertising campaigns"
+              img="/images/card14.webp"
+              tag="Creative campaigns"
               tags={["Brand identity", "Print design"]}
-              marqueeLabel="Visionary designs"
+              marqueeLabel="Interactive campaigns"
               big
             />
           </div>
@@ -193,9 +187,11 @@ function WorkCard({ img, tag, tags, marqueeLabel, big = false }: WorkCardProps) 
           fill
           sizes="(max-w-[1400px]) 100vw, 1400px"
           loading="lazy"
-          className="object-cover transition-all duration-500 group-hover:blur-[6px]"
+          className="object-cover transition-all duration-500 lg:group-hover:blur-[6px]"
+          unoptimized
+          referrerPolicy="no-referrer"
         />
-        <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 group-hover:opacity-100">
+        <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-500 lg:group-hover:opacity-100">
           <div className="absolute inset-x-0 bg-white py-3.5 shadow-sm transform -translate-y-1/2 top-1/2">
             <div className="marquee">
               <div className="marquee__track text-[11px] font-bold uppercase tracking-widest text-black flex items-center">
@@ -208,7 +204,7 @@ function WorkCard({ img, tag, tags, marqueeLabel, big = false }: WorkCardProps) 
               </div>
             </div>
           </div>
-          <div className="z-10 transition-transform duration-500 scale-90 group-hover:scale-100">
+          <div className="z-10 transition-transform duration-500 scale-90 lg:group-hover:scale-100">
             <div className="w-[70px] h-[70px] rounded-full flex items-center justify-center bg-white/25 text-white text-xl backdrop-blur-md border border-white/40 shadow-[0_8px_32px_0_rgba(0,0,0,0.15)] transition-transform duration-300 hover:scale-105">
               ↗
             </div>

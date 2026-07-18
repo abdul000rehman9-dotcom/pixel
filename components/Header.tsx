@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
+import Link from 'next/link'; // Native Next.js Link
 
 type PageType = string;
 
@@ -97,55 +98,57 @@ export default function Header ({ activePage, setActivePage, onContactClick, tra
         ],
       ],
     },
-    { name: 'Contact', type: 'link', page: 'home' }, // Will handle as onContactClick
+    { name: 'Contact', type: 'link', page: 'contact' },
   ];
 
   return (
     <header className={`relative z-50 w-full ${transparent ? 'bg-transparent border-transparent' : 'border-b border-black/10 bg-[#f9f8f4]'} px-6 py-4 md:px-16 md:py-5`}>
       <div className="mx-auto flex max-w-7xl items-center justify-between">
         {/* Logo */}
-        <button
-          onClick={() => handleLinkClick('home')}
-          className="flex items-center gap-2 group cursor-pointer text-left"
+        <Link
+          href="/"
+          onClick={() => {
+            setIsOpen(false);
+            setActiveSubMenu(null);
+          }}
+          className="group flex items-center gap-2 cursor-pointer text-left"
           id="header-logo-btn"
         >
-     <motion.a
-  href="/"
-  className="group flex items-center gap-2"
-  whileHover="hover"
-  initial="rest"
-  animate="rest"
->
-  {/* Orange Pf circle */}
-  <motion.span
-    variants={{ rest: { rotate: 0 }, hover: { rotate: 360 } }}
-    transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-    className="grid h-9 w-9 place-items-center rounded-full bg-[#FF5A1F] text-white font-semibold text-[13px] tracking-tight"
-    style={{ fontFamily: "'Parkinsans', sans-serif" }}
-  >
-    Pf
-  </motion.span>
+          <motion.div
+            className="group flex items-center gap-2"
+            whileHover="hover"
+            initial="rest"
+            animate="rest"
+          >
+            {/* Orange Pf circle */}
+            <motion.span
+              variants={{ rest: { rotate: 0 }, hover: { rotate: 360 } }}
+              transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="grid h-9 w-9 place-items-center rounded-full bg-[#FF5A1F] text-white font-semibold text-[13px] tracking-tight"
+              style={{ fontFamily: "'Parkinsans', sans-serif" }}
+            >
+              Pf
+            </motion.span>
 
-  {/* pixelforte text */}
-  <span
-    className="text-2xl font-semibold tracking-tight text-[#111] transition-colors group-hover:text-[#FF5A1F]"
-    style={{ fontFamily: "'Parkinsans', sans-serif" }}
-  >
-    pixelforte
-  </span>
-</motion.a>
-
-        </button>
+            {/* pixelforte text */}
+            <span
+              className="text-2xl font-semibold tracking-tight text-[#111] transition-colors group-hover:text-[#FF5A1F]"
+              style={{ fontFamily: "'Parkinsans', sans-serif" }}
+            >
+              pixelforte
+            </span>
+          </motion.div>
+        </Link>
 
         {/* Right Controls */}
         <div className="flex items-center gap-4 sm:gap-5">
-          {/* Button: "Let's Collaborate" */}
+          {/* Button: "Let's Collaborate" (hidden on small/mobile, visible on sm and up) */}
           <button
             onClick={() => {
               onContactClick();
               setIsOpen(false);
             }}
-            className="group relative inline-flex h-[38px] items-center justify-center overflow-hidden rounded-none bg-black px-5 text-[10px] md:text-[11px] font-bold uppercase tracking-wider text-white transition-all duration-500 cursor-pointer"
+            className="group relative hidden sm:inline-flex h-[38px] items-center justify-center overflow-hidden rounded-none bg-black px-5 text-[10px] md:text-[11px] font-bold uppercase tracking-wider text-white transition-all duration-500 cursor-pointer"
           >
             {/* Dual sliding background (orange left, white right) */}
             <div className="absolute inset-0 w-full h-full flex translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0">
@@ -156,10 +159,10 @@ export default function Header ({ activePage, setActivePage, onContactClick, tra
             {/* Text Sliding Wrapper */}
             <span className="relative z-10 block h-4 overflow-hidden">
               <span className="block transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full text-white">
-                Let's Collaborate
+                Let&apos;s Collaborate
               </span>
               <span className="absolute left-0 top-0 block translate-y-full transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 text-black font-black">
-                Let's Collaborate
+                Let&apos;s Collaborate
               </span>
             </span>
           </button>
@@ -213,19 +216,15 @@ export default function Header ({ activePage, setActivePage, onContactClick, tra
                   className="border-b border-black/[0.04] pb-2 last:border-none"
                 >
                   {item.type === 'link' ? (
-                    <button
+                    <Link
+                      href={item.page === 'home' ? '/' : `/${item.page}`}
                       onClick={() => {
-                        if (item.name === 'Contact') {
-                          onContactClick();
-                          setIsOpen(false);
-                        } else if (item.page) {
-                          handleLinkClick(item.page);
-                        }
+                        setIsOpen(false);
                       }}
                       className="block w-full text-left py-1 text-[18px] font-bold text-black transition-colors duration-200 hover:text-[#f26b2c] cursor-pointer"
                     >
                       {item.name}
-                    </button>
+                    </Link>
                   ) : (
                     <>
                       <button
@@ -252,12 +251,16 @@ export default function Header ({ activePage, setActivePage, onContactClick, tra
                                 <ul key={cIdx} className="space-y-1.5">
                                   {col.map((subLink, lIdx) => (
                                     <li key={lIdx}>
-                                      <button
-                                        onClick={() => handleLinkClick(subLink.page)}
+                                      <Link
+                                        href={subLink.page === 'home' ? '/' : `/${subLink.page}`}
+                                        onClick={() => {
+                                          setIsOpen(false);
+                                          setActiveSubMenu(null);
+                                        }}
                                         className="block text-left text-[13px] font-semibold text-gray-500 transition-colors duration-200 hover:text-black cursor-pointer"
                                       >
                                         {subLink.name}
-                                      </button>
+                                      </Link>
                                     </li>
                                   ))}
                                 </ul>
@@ -285,6 +288,33 @@ export default function Header ({ activePage, setActivePage, onContactClick, tra
                 <br />
                 94025, USA
               </p>
+
+              {/* Mobile/Small Screen Button: "Let's Collaborate" */}
+              <div className="mt-4 pt-4 border-t border-black/[0.04] sm:hidden">
+                <button
+                  onClick={() => {
+                    onContactClick();
+                    setIsOpen(false);
+                  }}
+                  className="w-full group relative inline-flex h-[38px] items-center justify-center overflow-hidden rounded-none bg-black px-5 text-[11px] font-bold uppercase tracking-wider text-white transition-all duration-500 cursor-pointer"
+                >
+                  {/* Dual sliding background (orange left, white right) */}
+                  <div className="absolute inset-0 w-full h-full flex translate-y-full transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0">
+                    <div className="w-1/2 h-full bg-[#f26b2c]" />
+                    <div className="w-1/2 h-full bg-white" />
+                  </div>
+
+                  {/* Text Sliding Wrapper */}
+                  <span className="relative z-10 block h-4 overflow-hidden">
+                    <span className="block transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:-translate-y-full text-white">
+                      Let&apos;s Collaborate
+                    </span>
+                    <span className="absolute left-0 top-0 block translate-y-full transform transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 text-black font-black">
+                      Let&apos;s Collaborate
+                    </span>
+                  </span>
+                </button>
+              </div>
             </div>
           </motion.div>
         )}

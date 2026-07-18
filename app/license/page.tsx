@@ -9,8 +9,7 @@ export default function LicenseRoutePage() {
   const [activePage, setActivePage] = useState<string>("license");
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   return (

@@ -9,8 +9,7 @@ export default function NextNotFoundPage() {
   const [activePage, setActivePage] = useState<string>("404");
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   return (

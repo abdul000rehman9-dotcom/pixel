@@ -9,8 +9,7 @@ export default function TeamRoutePage() {
   const [activePage, setActivePage] = useState<string>("team");
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   return (

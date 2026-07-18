@@ -1,12 +1,17 @@
 "use client";
 
 import React from 'react';
-import { useRouter } from 'next/navigation'; // Next.js Router
+import Link from 'next/link'; // Native Next.js Link
 import { ArrowUpRight } from 'lucide-react';
 
 // Local PageType definition
 type PageType =
   | 'home'
+  | 'about'
+  | 'team'
+  | 'blog'
+  | 'blog-post'
+  | 'contact'
   | 'services-one'
   | 'services-two'
   | 'services-three'
@@ -14,29 +19,28 @@ type PageType =
   | 'portfolio-two'
   | 'portfolio-three'
   | 'portfolio-details'
+  | 'pricing'
+  | 'license'
   | 'style-guide'
   | '404'
   | (string & {});
 
 export default function Footer() {
-  const router = useRouter();
-
-  const handleNavigation = (page: PageType) => {
-    // Agar home page hai to '/' par bhejein, warna route page name par
-    const targetRoute = page === 'home' ? '/' : `/${page}`;
-    router.push(targetRoute);
-
-    // Smooth scroll to top
-    if (typeof window !== 'undefined') {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
-
   const sitemap = [
     {
-      title: 'Links',
+      title: 'Company',
       links: [
         { label: 'Home', page: 'home' as PageType },
+        { label: 'About', page: 'about' as PageType },
+        { label: 'Team', page: 'team' as PageType },
+        { label: 'Blog', page: 'blog' as PageType },
+        { label: 'Blog post', page: 'blog-post' as PageType },
+        { label: 'Contact', page: 'contact' as PageType }
+      ]
+    },
+    {
+      title: 'Services',
+      links: [
         { label: 'Service one', page: 'services-one' as PageType },
         { label: 'Service two', page: 'services-two' as PageType },
         { label: 'Service three', page: 'services-three' as PageType }
@@ -115,7 +119,7 @@ export default function Footer() {
         </div>
 
         {/* Links Grid Column */}
-        <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-8 text-left">
+        <div className="md:col-span-7 grid grid-cols-2 sm:grid-cols-4 gap-8 text-left">
           {sitemap.map((col, cIdx) => (
             <div key={cIdx} className="flex flex-col gap-4">
               <span className="text-[10px] tracking-[0.25em] text-cream/40 font-display font-semibold uppercase">
@@ -124,12 +128,12 @@ export default function Footer() {
               <ul className="flex flex-col gap-2.5">
                 {col.links.map((link, lIdx) => (
                   <li key={lIdx}>
-                    <button
-                      onClick={() => handleNavigation(link.page)}
+                    <Link
+                      href={link.page === 'home' ? '/' : `/${link.page}`}
                       className="font-sans text-sm text-cream/70 hover:text-[#f26b2c] transition-colors duration-200 text-left cursor-pointer"
                     >
                       {link.label}
-                    </button>
+                    </Link>
                   </li>
                 ))}
               </ul>

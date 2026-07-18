@@ -119,8 +119,7 @@ export default function PortfolioOnePage() {
   const [activePage, setActivePage] = useState<PageType>("portfolio-one");
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   return (

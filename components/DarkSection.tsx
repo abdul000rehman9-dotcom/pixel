@@ -123,7 +123,7 @@ function Card({
       }}
       className="absolute inset-0 flex items-center justify-center will-change-transform"
     >
-      <div className="w-[min(67vw,1280px)] min-w-[320px] rounded-2xl bg-white p-6 shadow-2xl border border-white/5">
+      <div className="w-[90vw] md:w-[min(67vw,1280px)] max-w-full rounded-2xl bg-white p-4 sm:p-6 shadow-2xl border border-white/5">
         <div className="aspect-[1.93/1] overflow-hidden rounded-xl relative w-full">
           <Image
             src={data.image}

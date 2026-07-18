@@ -134,8 +134,7 @@ export default function PortfolioTwoPage() {
   const [activePage, setActivePage] = useState<PageType>("portfolio-two");
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   return (

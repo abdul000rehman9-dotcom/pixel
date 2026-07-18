@@ -141,6 +141,7 @@ export default function CraftedSection() {
                     src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" 
                     alt="Avatar 1" 
                     unoptimized 
+                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="relative w-8 h-8 rounded-full border border-black overflow-hidden animate-[pulse_3s_infinite_100ms]">
@@ -150,6 +151,7 @@ export default function CraftedSection() {
                     src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" 
                     alt="Avatar 2" 
                     unoptimized 
+                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="relative w-8 h-8 rounded-full border border-black overflow-hidden animate-[pulse_3s_infinite_200ms]">
@@ -159,6 +161,7 @@ export default function CraftedSection() {
                     src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=100&q=80" 
                     alt="Avatar 3" 
                     unoptimized 
+                    referrerPolicy="no-referrer"
                   />
                 </div>
                 <div className="w-8 h-8 rounded-full bg-[#f26b2c] border border-black flex items-center justify-center text-[10px] font-bold text-white shadow-md relative z-10">

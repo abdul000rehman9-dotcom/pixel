@@ -113,8 +113,7 @@ export default function ServicesTwoPage() {
   const [slideIndex, setSlideIndex] = useState(0);
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   const scrollRef = useRef<HTMLDivElement>(null);

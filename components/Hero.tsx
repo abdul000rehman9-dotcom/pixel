@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import Image from "next/image";
 
@@ -12,6 +12,75 @@ interface CardItem {
   title: string;
   img: string; 
   type: "image" | "video";
+}
+
+function HeroCard({ card, index, isMobile = false }: { card: CardItem; index: number; isMobile?: boolean }) {
+  if (isMobile) {
+    return (
+      <div
+        className="w-full rounded-[3px] bg-white p-2 shadow-sm border border-black/5 relative"
+      >
+        <div className="aspect-[4/3] w-full overflow-hidden rounded-[1px] bg-gray-100 relative">
+          {card.type === "video" ? (
+            <video
+              src={card.img}
+              autoPlay
+              loop
+              muted
+              playsInline
+              preload="auto"
+              className="h-full w-full object-cover"
+            />
+          ) : (
+            <Image
+              src={card.img}
+              alt={card.title}
+              fill
+              sizes="(max-w-640px) 50vw"
+              className="object-cover"
+              referrerPolicy="no-referrer"
+            />
+          )}
+        </div>
+        <p className="mt-2 text-center text-[11px] font-bold text-black truncate px-1 uppercase tracking-tight">
+          {card.title}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="animated-card w-[280px] flex-shrink-0 rounded-[3px] bg-white p-2.5 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/5 will-change-transform transition-transform duration-300 ease-out hover:scale-105 hover:z-50"
+    >
+      <div className="aspect-[4/3] w-full overflow-hidden rounded-[1px] bg-gray-100 relative">
+        {card.type === "video" ? (
+          <video
+            src={card.img}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload="auto"
+            className="h-full w-full object-cover pointer-events-none"
+          />
+        ) : (
+          <Image
+            src={card.img}
+            alt={card.title}
+            fill
+            sizes="240px"
+            className="object-cover pointer-events-none"
+            priority={index < 6}
+            referrerPolicy="no-referrer"
+          />
+        )}
+      </div>
+      <p className="mt-3 text-center font-sans text-xs font-bold tracking-tight text-black uppercase">
+        {card.title}
+      </p>
+    </div>
+  );
 }
 
 const CARDS_DATA: CardItem[] = [
@@ -159,10 +228,10 @@ export default function Hero() {
           <span className="absolute inset-0 h-full w-full translate-y-full bg-[#f26b2c] transition-transform duration-300 ease-out group-hover:translate-y-0"></span>
           <span className="relative z-10 block h-4 overflow-hidden">
             <span className="block transform transition-transform duration-300 ease-out group-hover:-translate-y-full">
-              Let's Collaborate
+              Let&apos;s Collaborate
             </span>
             <span className="absolute left-0 top-0 block translate-y-full transform transition-transform duration-300 ease-out group-hover:translate-y-0">
-              Let's Collaborate
+              Let&apos;s Collaborate
             </span>
           </span>
         </a>
@@ -175,69 +244,14 @@ export default function Hero() {
           style={{ width: `${duplicatedCards.length * 256}px` }}
         >
           {duplicatedCards.map((card, index) => (
-            <div
-              key={`${card.id}-${index}`}
-              className="animated-card w-[280px] flex-shrink-0 rounded-[3px] bg-white p-2.5 shadow-[0_4px_25px_rgba(0,0,0,0.04)] border border-black/5 will-change-transform transition-transform duration-300 ease-out hover:scale-105 hover:z-50"
-            >
-              <div className="aspect-[4/3] w-full overflow-hidden rounded-[1px] bg-gray-100 relative">
-                {card.type === "video" ? (
-                  <video
-                    src={card.img}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    className="h-full w-full object-cover pointer-events-none"
-                  />
-                ) : (
-                  <Image
-                    src={card.img} // Ab yeh direct string path ko handle karega safely
-                    alt={card.title}
-                    fill
-                    sizes="240px"
-                    className="object-cover pointer-events-none"
-                    priority={index < 6}
-                  />
-                )}
-              </div>
-              <p className="mt-3 text-center font-sans text-xs font-bold tracking-tight text-black uppercase">
-                {card.title}
-              </p>
-            </div>
+            <HeroCard key={`${card.id}-${index}`} card={card} index={index} />
           ))}
         </div>
       </div>
 
       <div className="md:hidden grid grid-cols-2 gap-4 w-full max-w-sm mx-auto mt-2 mb-4">
-        {mobileCards.map((card) => (
-          <div
-            key={card.id}
-            className="w-full rounded-[3px] bg-white p-2 shadow-sm border border-black/5"
-          >
-            <div className="aspect-[4/3] w-full overflow-hidden rounded-[1px] bg-gray-100 relative">
-              {card.type === "video" ? (
-                <video
-                  src={card.img}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  className="h-full w-full object-cover"
-                />
-              ) : (
-                <Image
-                  src={card.img}
-                  alt={card.title}
-                  fill
-                  sizes="(max-w-640px) 50vw"
-                  className="object-cover"
-                />
-              )}
-            </div>
-            <p className="mt-2 text-center text-xs font-bold text-black truncate px-1">
-              {card.title}
-            </p>
-          </div>
+        {mobileCards.map((card, index) => (
+          <HeroCard key={card.id} card={card} index={index} isMobile />
         ))}
       </div>
 
@@ -247,7 +261,7 @@ export default function Hero() {
           alt="Rotating Icon"
           width={50}
           height={50}
-          className="animate-[spin_30s_linear_infinite] object-contain w-10 h-10"
+          className="animate-[spin_6s_linear_infinite] object-contain w-10 h-10"
         />
         <p className="text-sm font-medium leading-relaxed text-black/70 max-w-xl md:text-[15px]">
           We turn bold ideas into impactful brand experiences that inspire audiences, evoke emotion,

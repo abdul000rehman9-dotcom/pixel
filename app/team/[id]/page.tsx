@@ -283,8 +283,7 @@ export default function TeamMemberDetailPage({ params }: { params: Promise<{ id:
   }, [id]);
 
   const onContactClick = () => {
-    const el = document.getElementById("contact");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
+    window.location.href = "/contact";
   };
 
   // Triggers the magical "Shuffle Identity" engine
